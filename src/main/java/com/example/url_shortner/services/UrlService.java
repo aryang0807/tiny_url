@@ -9,5 +9,5 @@ public interface UrlService {
     public List<Url> getUrls();
 
     public String getTinyUrl(String testUrl);
-    public String getBigUrl(String testUrl);
+    public String getOriginalUrl(String testUrl);
 }

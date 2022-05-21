@@ -12,7 +12,7 @@ import java.util.List;
 public class UrlServiceImplement implements UrlService {
     @Autowired
     private UrlRepository urlRepository;
-    private static int MAX_COLLISIONS = 1000;
+    private static int MAX_COLLISIONS = 1000;                      // max collisions allowed in case of same tinyUrl
 
     public UrlServiceImplement() {
     }
@@ -20,49 +20,48 @@ public class UrlServiceImplement implements UrlService {
     @Override
     public List<Url> getUrls() {
           return urlRepository.findAll();
-    }
+    } // returns all the entries present in the DB
 
     @Override
     public String getTinyUrl(String testUrl) {
 
-        String toFind= "";
+        String tinyUrl= "";
         Url present = urlRepository.findByOrgUrl(testUrl);
 
-        if(present==null){
-            //      implementing shortener if not present in db
+        if(present==null){                                        //implementing shortener if testUrl is not present in DB
             for (int index=0;index<testUrl.length()/2;index++) {
-                if (index % 2 == 0) toFind += testUrl.charAt(index);
-                else toFind += testUrl.charAt(testUrl.length() - index - 1);
+                if (index % 2 == 0) tinyUrl += testUrl.charAt(index);
+                else tinyUrl += testUrl.charAt(testUrl.length() - index - 1);
             }
-            // checking for collisions
-            if(testUrl.length()==1)toFind=testUrl;
 
-            String tinyUrl = toFind;
-            for(int probe = 0; probe<MAX_COLLISIONS; probe++){
-                Url collision = urlRepository.findByNewUrl(tinyUrl);
+            if(testUrl.length()==1)tinyUrl=testUrl;
+
+            String finalUrl = tinyUrl;
+            for(int probe = 0; probe<MAX_COLLISIONS; probe++){      //  checking if same finalUrl is present or not
+                Url collision = urlRepository.findByNewUrl(finalUrl);
                 if(collision==null)break;
-                tinyUrl = toFind + Integer.toString(probe);
+                finalUrl = tinyUrl + Integer.toString(probe);
             }
 
-            toFind = tinyUrl;
-            Url temp = new Url(testUrl, toFind);
-            urlRepository.save(temp);
+            tinyUrl = finalUrl;
+            Url temp = new Url(testUrl, tinyUrl);
+            urlRepository.save(temp);                              // saving the Url in DB
         }
         else {
-            toFind=present.getNewUrl();
+            tinyUrl=present.getNewUrl();                           // if testUrl is already in DB return its tinyUrl
         }
-        return toFind;
+        return tinyUrl;
     }
 
     @Override
-    public String getBigUrl(String testUrl) {
-        String toFind= "";
+    public String getOriginalUrl(String testUrl) {
+        String originalUrl= "";
         Url present = urlRepository.findByNewUrl(testUrl);
         if(present==null){
-            toFind= "No such Url found";
+            originalUrl= "No such Url found";
         }else {
-            toFind = present.getOrgUrl();
+            originalUrl = present.getOrgUrl();                   // if testUrl is present in DB return its originalUrl
         }
-        return toFind;
+        return originalUrl;
     }
 }

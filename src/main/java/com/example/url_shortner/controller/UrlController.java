@@ -19,15 +19,15 @@ public class UrlController {
 
     @GetMapping("/")
     public String shortUrl(){
-        return "returns shortened url";
+        return "Returns Shortened Url";
     }
 
-    @GetMapping("/urls")
+    @GetMapping("/urls")                                             // called when a get request is sent to "/urls"
     public List<Url> getUrls(){
         return this.urlService.getUrls();
     }
 
-    @GetMapping("/urls/")
+    @GetMapping("/urls/")                                            // called when a get request is sent to /urls/?testUrl="value"
     public ResponseEntity<String> getTinyUrl(@RequestParam String testUrl){
         try {
             String tinyUrl = this.urlService.getTinyUrl(testUrl);
@@ -37,11 +37,11 @@ public class UrlController {
         }
     }
 
-    @GetMapping("/tinyUrl/")
-    public ResponseEntity<String> getBigUrl(@RequestParam String testUrl){
+    @GetMapping("/tinyUrl/")                                        // called when a get request is sent to /tinyUrl/?testUrl="value"
+    public ResponseEntity<String> getOriginalUrl(@RequestParam String testUrl){
         try {
-            String bigUrl = this.urlService.getBigUrl(testUrl);
-            return new ResponseEntity<>(bigUrl, HttpStatus.OK);
+            String originalUrl = this.urlService.getOriginalUrl(testUrl);
+            return new ResponseEntity<>(originalUrl, HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>("Some error Occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
