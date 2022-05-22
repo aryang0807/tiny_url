@@ -8,9 +8,9 @@ A tiny URL like REST API. It gives you tiny URL for some URL and the original UR
 4. Postman
 
 # Setting Up
-1. Clone this github repository to your local machine using git clone <repository URL>  
+1. Clone this github repository to your local machine using git clone "repository URL"  
 2. Connecting to Mongodb
-- go to src-> main -> resources -> application.properties and specify the values of the 
+- go to src-> main -> resources -> application.properties and specify the values of the following:   
   spring.data.mongodb.host (your mongodb host URL)  
   spring.data.mongodb.port (your mongodb port number)  
   spring.data.mongodb.database  (name of the database you want to put your entries into)  
@@ -22,7 +22,7 @@ A tiny URL like REST API. It gives you tiny URL for some URL and the original UR
 Sending Request via Postman:  
 http://localhost:8080/urls  
     
-2./urls/?testUrl=<URL>  
+2./urls/?testUrl="URL"  
 **GET** request: Checks if the URL is present in the database, if so then it returns it's tinyURL and if it is not present it shortens the URL and save the entry to database and returns it's tinyURL.  
 
 Example:    
@@ -32,7 +32,7 @@ http://localhost:8080/urls/?testUrl=https://www.youtube.com/
 Response:  
 hmtcse/uwuwy   
 
-3./tinyURL/?testUrl=<tiny URL>  
+3./tinyURL/?testUrl="tiny URL"  
 **GET** request: Checks if the tiny URL is present in the database, if so then it returns it's original URL and if it is not present then it returns "No such url found". 
 
 Example:   
