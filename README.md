@@ -16,13 +16,13 @@ A tiny URL like REST API. It gives you tiny URL for some URL and the original UR
   spring.data.mongodb.database  (name of the database you want to put your entries into)
   
 # API
-1. /urls
+1./urls
 **GET** request : Returns all entries present in MongoDB.
 
 Sending Request via Postman:
 http://localhost:8080/urls
     
-2. /urls/?testUrl=<URL>
+2./urls/?testUrl=<URL>
 **GET** request: Checks if the URL is present in the database, if so then it returns it's tinyURL and if it is not present it shortens the URL and save the entry to database and returns it's tinyURL.
 
 Example:  
@@ -32,7 +32,7 @@ http://localhost:8080/urls/?testUrl=https://www.youtube.com/
 Response:
 hmtcse/uwuwy  
 
-3. /tinyURL/?testUrl=<tiny URL>
+3./tinyURL/?testUrl=<tiny URL>
 **GET** request: Checks if the tiny URL is present in the database, if so then it returns it's original URL and if it is not present then it returns "No such url found". 
 
 Example: 
