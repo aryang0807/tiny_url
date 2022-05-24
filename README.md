@@ -21,7 +21,7 @@ To build the apllication use the command - `./gradlew build`
 To run the application use the command - `./gradlew bootRun`  
 
 # API
-1. `/urls`  
+1.`/urls`  
 **GET** request : Returns all entries present in MongoDB.  
 
 Sending Request via Postman:  
@@ -30,7 +30,7 @@ Sending Request via Postman:
 Sending Request via terminal:  
 `curl --location --request GET 'http://localhost:8080/urls'`  
     
-2. `/urls/?testUrl="URL"`  
+2.`/urls/?testUrl="URL"`  
 **GET** request: Checks if the URL is present in the database, if so then it returns it's tinyURL and if it is not present it shortens the URL and save the entry to database and returns it's tinyURL.  
 
 Example:    
@@ -43,7 +43,7 @@ Sending Request via terminal:
 Response:  
 hmtcse/uwuwy   
 
-3./tinyURL/?testUrl="tiny URL"  
+3.`/tinyURL/?testUrl="tiny URL"`  
 **GET** request: Checks if the tiny URL is present in the database, if so then it returns it's original URL and if it is not present then it returns "No such url found". 
 
 Example:   
