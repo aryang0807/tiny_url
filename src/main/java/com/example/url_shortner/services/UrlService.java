@@ -2,6 +2,7 @@ package com.example.url_shortner.services;
 
 import com.example.url_shortner.entity.Url;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UrlService {
