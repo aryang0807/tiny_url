@@ -24,23 +24,22 @@ public class UrlServiceImplement implements UrlService {
 
     @Override
     public String getTinyUrl(String testUrl) {
-
         String tinyUrl = "";
         Url present = urlRepository.findByOrgUrl(testUrl);
 
         if (present == null) {                                        //implementing shortener if testUrl is not present in DB
-            for (int index = 0; index < testUrl.length() / 2; index++) {
-                if (index % 2 == 0) tinyUrl += testUrl.charAt(index);
-                else tinyUrl += testUrl.charAt(testUrl.length() - index - 1);
+            for (int index = 0; index < testUrl.length(); index+=3) {
+                 tinyUrl += testUrl.charAt(index);
             }
 
             if (testUrl.length() == 1) tinyUrl = testUrl;
-
             String finalUrl = tinyUrl;
             for (int probe = 0; probe < MAX_COLLISIONS; probe++) {      //  checking if same finalUrl is present or not
                 Url collision = urlRepository.findByNewUrl(finalUrl);
                 if (collision == null) break;
-                finalUrl = tinyUrl + Integer.toString(probe);
+                int index = (int)(testUrl.length()*Math.random());
+                finalUrl = tinyUrl.substring(0,index) +Integer.toString((int)(Math.random()*10000000))+ // placing a random number at random index
+                        tinyUrl.substring(index);
             }
 
             tinyUrl = finalUrl;
