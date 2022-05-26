@@ -28,7 +28,7 @@ Sending Request via Postman:
 `http://localhost:8080/urls`  
 
 Sending Request via terminal:  
-`curl --location --request GET 'http://localhost:8080/urls'`  
+`curl -X GET 'http://localhost:8080/urls'`  
     
 2.`/urls/?testUrl="URL"`  
 **GET** request: Checks if the URL is present in the database, if so then it returns it's tinyURL and if it is not present it shortens the URL and save the entry to database and returns it's tinyURL.  
@@ -38,7 +38,7 @@ Sending GET Request via Postman:
 `http://localhost:8080/urls/?testUrl=https://www.youtube.com/`   
 
 Sending Request via terminal:  
-`curl --location --request GET 'http://localhost:8080/urls/?testUrl=https://www.youtube.com/'`  
+`curl -X GET 'http://localhost:8080/urls/?testUrl=https://www.youtube.com/'`  
 
 Response:  
 hmtcse/uwuwy   
@@ -51,7 +51,7 @@ Sending GET Request via Postman:
 `http://localhost:8080/tinyUrl/?testUrl=hmtcse/uwuwy`   
 
 Sending Request via terminal:  
-`curl --location --request GET 'http://localhost:8080/tinyUrl/?testUrl=hmtcse/uwuwy'`  
+`curl -X GET 'http://localhost:8080/tinyUrl/?testUrl=hmtcse/uwuwy'`  
 
 Response:  
 https://www.youtube.com/   
